@@ -12,17 +12,17 @@ app.get("/", function(req, res) {
  res.send("Express Welcome!");
 });
 
-app.get("/hello.text", function(req, res) {
- res.send("Hello World");
- res.end("(WIDE WEB)");
+app.get("/hello.text", function(req, res, next) {
+ res.set("Express-Response", "Hello World");
+ next();
 });
 
-app.get("/contact", function(req, res) {
- res.render("contact");
+app.get("/hello*", function(req, res) {
+    res.send("Hello World (WIDE WEB)");
 });
 
 app.get("*", function(req, res) {
- res.end("Hello Express");
+ res.send("Hello Express");
 });
 
 var server = http.createServer(app).listen(app.get("port"), function(){
